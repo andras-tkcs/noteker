@@ -32,7 +32,7 @@ Each page is rendered to an image and sent to Claude Vision, which transcribes t
 
 | Tool | Description |
 |------|-------------|
-| `noteker_process_pdf(file_path, note_context="")` | Transcribe a local PDF of handwritten notes. Returns clean Markdown. `note_context` is an optional hint (e.g. `"team meeting 2025-06-20"`) that helps Claude resolve ambiguous words. |
+| `noteker_process_pdf(file_path, note_context="", page_start=None, page_end=None)` | Transcribe a local PDF of handwritten notes. Returns clean Markdown. `note_context` is an optional hint (e.g. `"team meeting 2025-06-20"`) that helps Claude resolve ambiguous words. `page_start` / `page_end` are 1-based inclusive page bounds — omit both to process the whole document (capped at `max_pages`). |
 | `noteker_status()` | Return version, config path, and whether the API key is set. |
 
 ---
@@ -122,7 +122,7 @@ Adding the export to `~/.zshrc` means you never need it in the config file.
 
 ## MCP registration
 
-Add Noteker to Claude's MCP configuration. The config file is `~/.claude/claude_desktop_config.json` (Claude desktop app) or the project-level `.claude/settings.json`.
+Add Noteker to Claude's MCP configuration. The config file is `~/Library/Application Support/Claude/claude_desktop_config.json` (Claude desktop app) or the project-level `.claude/settings.json`.
 
 ### DMG install
 
