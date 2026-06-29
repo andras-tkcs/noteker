@@ -1,0 +1,10 @@
+Noteker
+Copyright 2025 Andras Takacs
+
+This product includes software developed by Andras Takacs.
+
+Third-party dependencies:
+- FastMCP (MIT) — https://github.com/jlowin/fastmcp
+- PyMuPDF (AGPL-3.0 / commercial) — https://pymupdf.readthedocs.io
+- Anthropic Python SDK (MIT) — https://github.com/anthropics/anthropic-sdk-python
+- PyYAML (MIT) — https://pyyaml.org

@@ -1,0 +1,22 @@
+# Noteker configuration example.
+# When running from source: copy to config/settings.yaml
+# When installed via DMG:  copy to ~/.noteker/config/settings.yaml
+
+anthropic:
+  # Anthropic API key. Can also be set via the ANTHROPIC_API_KEY environment variable.
+  api_key: sk-ant-...
+  # Claude model used for handwriting transcription.
+  # claude-sonnet-4-6 is the recommended balance of quality and cost.
+  # Use claude-opus-4-8 for the highest accuracy on very difficult handwriting.
+  model: claude-sonnet-4-6
+
+noteker:
+  # Maximum number of PDF pages to process (safety cap).
+  max_pages: 50
+  # Rendering resolution in DPI. Higher = sharper images but larger API payloads.
+  # 150 is a good default for handwritten notes; try 200 for very small handwriting.
+  dpi: 150
+
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: INFO

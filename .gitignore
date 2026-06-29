@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+*.egg
+
+# Config (never commit)
+config/settings.yaml
+
+# Logs
+logs/*.log
+
+# macOS
+.DS_Store
