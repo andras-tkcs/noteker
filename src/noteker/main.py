@@ -15,7 +15,7 @@ from .paths import CONFIG_FILE, LOG_FILE
 from .pdf_renderer import render_pdf_pages
 from .transcriber import transcribe_pages
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 
 logger = logging.getLogger(__name__)
 
@@ -72,12 +72,20 @@ mcp = FastMCP(name="noteker", version=VERSION)
 
 
 @mcp.tool()
-async def noteker_process_pdf(file_path: str, note_context: str = "") -> str:
+async def noteker_process_pdf(
+    file_path: str,
+    note_context: str = "",
+    page_start: int | None = None,
+    page_end: int | None = None,
+) -> str:
     """Convert a local PDF of handwritten notes into clean Markdown using Claude Vision.
 
     file_path: absolute path to a PDF file on the local filesystem.
     note_context: optional hint about the content (e.g. 'team meeting 2025-06-20').
                   Helps Claude resolve ambiguous words.
+    page_start: first page to process (1-based, inclusive). Omit to start from page 1.
+    page_end: last page to process (1-based, inclusive). Omit to process to the last page
+              (capped at max_pages when no range is given).
     """
     config = _load_config()
     api_key = _get_api_key(config)
@@ -93,9 +101,12 @@ async def noteker_process_pdf(file_path: str, note_context: str = "") -> str:
         raise ValueError(f"Expected a .pdf file, got: {file_path}")
 
     logger.info(
-        "Processing '%s' (model=%s, max_pages=%d, dpi=%d)", path.name, model, max_pages, dpi
+        "Processing '%s' (model=%s, max_pages=%d, dpi=%d, page_start=%s, page_end=%s)",
+        path.name, model, max_pages, dpi, page_start, page_end,
     )
-    pages = render_pdf_pages(str(path), max_pages=max_pages, dpi=dpi)
+    pages = render_pdf_pages(
+        str(path), max_pages=max_pages, dpi=dpi, page_start=page_start, page_end=page_end
+    )
 
     if not pages:
         return "*(empty PDF — no pages rendered)*"

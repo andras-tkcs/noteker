@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "noteker"
-version = "0.1.0"
+version = "0.1.1"
 description = "Handwritten PDF notes → clean markdown via Claude Vision MCP server"
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
